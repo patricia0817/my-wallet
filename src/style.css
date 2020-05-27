@@ -27,7 +27,7 @@ body {
   .page__container {
     margin-top: 2rem;
     border: 1px solid darkgrey;
-    border-radius: 3%;
+    border-radius: 10px;
   }
 }
 

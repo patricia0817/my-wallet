@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import StateContext from '../StateContext'
 import DispatchContext from '../DispatchContext'
+import Axios from 'axios'
 
 function Home( props ) {
   const [ username, setUsername ] = useState();
@@ -10,20 +11,21 @@ function Home( props ) {
   const appState = useContext( StateContext )
   const appDispatch = useContext( DispatchContext )
 
-  function handleSubmit( e ) {
+  async function handleSubmit( e ) {
     e.preventDefault();
-    if ( username && password ) {
-      appDispatch( { type: "login" } )
 
+    try {
+      const response = await Axios.get( 'https://banking-app-1e647.firebaseio.com/0.json' );
+      if ( response.data.username === username && response.data.password === password ) {
+        appDispatch( { type: "login", value: response.data } );
+        props.history.push( "/transactions" )
+      } else {
+        console.log( 'Invalid Username or Password' )
+      }
+    } catch ( e ) {
+      console.log( "There was a problem" )
     }
   }
-
-  useEffect( () => {
-    if ( appState.loggedIn ) {
-      appDispatch( { type: "flashMessage", value: { value: "Congrats, you successfully logged in!", messageType: "is-success" } } )
-      props.history.push( "/transactions" )
-    }
-  }, [ appState.loggedIn ] )
 
 
   return (

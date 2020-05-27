@@ -13,13 +13,16 @@ import DispatchContext from './DispatchContext'
 function Main() {
   const initialState = {
     loggedIn: false,
-    flashMessages: []
+    flashMessages: [],
+    user: {}
   }
 
   function appReducer( draft, action ) {
     switch ( action.type ) {
       case 'login':
         draft.loggedIn = true
+        draft.user = action.value
+
         return
       case 'logout':
         draft.loggedIn = false
@@ -29,6 +32,7 @@ function Main() {
         return
     }
   }
+
 
   const [ state, dispatch ] = useImmerReducer( appReducer, initialState )
 

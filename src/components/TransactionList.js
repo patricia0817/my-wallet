@@ -1,29 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+
+import StateContext from '../StateContext'
+
 
 function TransactionList() {
+  const appState = useContext( StateContext )
+
+
   return (
-    <article class="panel is-warning">
-      <p class="panel-heading">
+    <article className="panel is-warning">
+      <p className="panel-heading">
         Transaction List
         </p>
-      <a class="panel-block is-active">
-        <div className="container">
-          <div className="columns">
-            <span className="column has-text-left">New Yorker</span>
-            <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>200</span>
-          </div>
-          <div className="has-text-left">20/02/2020</div>
-        </div>
-      </a>
-      <a class="panel-block is-active">
-        <div className="container">
-          <div className="columns">
-            <span className="column has-text-left">New Yorker</span>
-            <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>200</span>
-          </div>
-          <div className="has-text-left">20/02/2020</div>
-        </div>
-      </a>
+      { appState.user.transactions.map( ( transaction, index ) => {
+        return (
+          <a key={ index } className="panel-block is-active">
+            <div className="container">
+              <div className="columns">
+                <span className="column has-text-left">{ transaction.merchant }</span>
+                <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>{ transaction.amount }</span>
+              </div>
+              <div className="has-text-left">{ transaction.date }</div>
+            </div>
+          </a>
+        )
+      } ) }
     </article>
   )
 }

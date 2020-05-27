@@ -1,12 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import TransactionsChart from './TransactionsChart'
 import TransactionList from './TransactionList'
 import DispatchContext from '../DispatchContext'
+import StateContext from '../StateContext'
 
 function Transactions( props ) {
   const appDispatch = useContext( DispatchContext )
+  const appState = useContext( StateContext )
+
 
   function handleAnalytics() {
     props.history.push( '/analytics' )
@@ -17,9 +20,15 @@ function Transactions( props ) {
     props.history.push( '/' )
   }
 
+  useEffect( () => {
+    if ( !appState.loggedIn ) {
+      props.history.push( '/' )
+    }
+  }, [] )
 
   return (
-    <div className="columns is-centered">
+    appState.loggedIn &&
+    < div className="columns is-centered" >
       <div className="page__container  is-4-tablet is-centered transaction-list__container column is-5 has-text-centered">
         <TransactionsChart />
         <TransactionList />
@@ -28,7 +37,7 @@ function Transactions( props ) {
           <button onClick={ handleLogout } className="button is-warning">Log Out</button>
         </div>
       </div>
-    </div>
+    </ div >
   )
 }
 
