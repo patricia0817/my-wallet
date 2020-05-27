@@ -39,3 +39,8 @@ body {
 .transaction-list {
   list-style-type: none;
 }
+
+.transactions__controls {
+  display: flex;
+  justify-content: space-between;
+}

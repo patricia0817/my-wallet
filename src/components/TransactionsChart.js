@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Chart } from 'react-charts'
 
-function MyChart() {
+function TransactionsChart() {
   const data = React.useMemo(
     () => [
       {
@@ -35,4 +35,4 @@ function MyChart() {
   )
 }
 
-export default MyChart
+export default TransactionsChart
