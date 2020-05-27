@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.login {
+  text-align: center;
+}
+
+.page__container {
+  border: none;
+  margin-top: 0;
+}
+
+.login .subtitle {
+  padding: 2rem 0 0 0;
+}
+
+.login input {
+  margin: 0.5rem 0;
+}
+
+.login .submit__login {
+  text-align: center;
+}
+
+@media all and (min-width: 1024px) {
+  .page__container {
+    margin-top: 2rem;
+    border: 1px solid darkgrey;
+    border-radius: 3%;
+  }
+}
+
+.transaction-list__item {
+  border-bottom: 1px solid darkgrey;
+  padding: 0.5rem;
+}
+
+.transaction-list {
+  list-style-type: none;
+}
