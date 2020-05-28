@@ -4,37 +4,32 @@ import StateContext from '../StateContext'
 function AnalyticsListItem() {
   const appState = useContext( StateContext )
 
-
-  function groupBy( objectArray, property ) {
-    return objectArray.reduce( function( acc, obj ) {
-      let key = obj[ property ]
-      if ( !acc[ key ] ) {
-        acc[ key ] = []
+  const analytics = appState.user.transactions.reduce( ( acc, tr ) => {
+    if ( acc[ tr.category ] !== undefined ) {
+      acc[ tr.category ].amount += tr.amount
+      acc[ tr.category ].count += 1
+    } else {
+      acc[ tr.category ] = {
+        amount: tr.amount,
+        count: 1
       }
-      acc[ key ].push( obj )
-      return acc
-    }, {} )
-  }
+    }
 
-  let groupedCategories = groupBy( appState.user.transactions, 'category' )
+    return acc
+  }, {} )
 
 
   return (
-
     <>
-      { Object.keys( groupedCategories ).map( ( category, index ) => {
-        let categoryAmount = 0;
-        groupedCategories[ category ].map( ( transaction ) => {
-          categoryAmount += transaction.amount
-        } )
+      { Object.keys( analytics ).map( ( category, index ) => {
         return (
           <a key={ index } className="panel-block is-active">
             <div className="container">
               <div className="columns">
                 <span className="column has-text-left">{ category }</span>
-                <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>{ categoryAmount }</span>
+                <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>{ analytics[ category ].amount.toFixed( 2 ) }</span>
               </div>
-              <div className="has-text-left">{ category.length }</div>
+              <div className="has-text-left">{ analytics[ category ].count }</div>
             </div>
           </a>
         )
