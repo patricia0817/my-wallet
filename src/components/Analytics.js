@@ -38,7 +38,6 @@ function Analytics( props ) {
           </div>
         </div>
       </div>
-      <p>Here, all your transactions will be displayed by categories</p>
     </>
   )
 }

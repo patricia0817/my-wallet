@@ -18,48 +18,29 @@ function AnalyticsListItem() {
 
   let groupedCategories = groupBy( appState.user.transactions, 'category' )
 
-  console.log( groupedCategories )
-  for ( const category in groupedCategories ) {
-    console.log( groupedCategories[ `${ category }` ] )
-    return (
-      <>
-        <a className="panel-block is-active">
-          <div className="container">
-            <div className="columns">
-              <span className="column has-text-left">{ category }</span>
-              <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>200</span>
+
+  return (
+
+    <>
+      { Object.keys( groupedCategories ).map( ( category, index ) => {
+        let categoryAmount = 0;
+        groupedCategories[ category ].map( ( transaction ) => {
+          categoryAmount += transaction.amount
+        } )
+        return (
+          <a key={ index } className="panel-block is-active">
+            <div className="container">
+              <div className="columns">
+                <span className="column has-text-left">{ category }</span>
+                <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>{ categoryAmount }</span>
+              </div>
+              <div className="has-text-left">{ category.length }</div>
             </div>
-            <div className="has-text-left">32</div>
-          </div>
-        </a>
-      </>
-    )
-  }
-
-
-  // return (
-
-  //   <>
-  //     <a className="panel-block is-active">
-  //       <div className="container">
-  //         <div className="columns">
-  //           <span className="column has-text-left">Groceries</span>
-  //           <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>200</span>
-  //         </div>
-  //         <div className="has-text-left">32</div>
-  //       </div>
-  //     </a>
-  //     <a className="panel-block is-active">
-  //       <div className="container">
-  //         <div className="columns">
-  //           <span className="column has-text-left">Clothing</span>
-  //           <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>200</span>
-  //         </div>
-  //         <div className="has-text-left">10</div>
-  //       </div>
-  //     </a>
-  //   </>
-  // )
+          </a>
+        )
+      } ) }
+    </>
+  )
 }
 
 export default AnalyticsListItem
