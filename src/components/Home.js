@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+import Axios from 'axios'
+
 import StateContext from '../StateContext'
 import DispatchContext from '../DispatchContext'
-import Axios from 'axios'
+
+import getUserService from '../services/usersService'
 
 function Home( props ) {
   const [ username, setUsername ] = useState();
@@ -15,9 +18,11 @@ function Home( props ) {
     e.preventDefault();
 
     try {
-      const response = await Axios.get( 'https://banking-app-1e647.firebaseio.com/0.json' );
-      if ( response.data.username === username && response.data.password === password ) {
-        appDispatch( { type: "login", value: response.data } );
+      const response = await getUserService()
+
+      if ( true ) {
+        // if ( response.data.username === username && response.data.password === password ) {
+        appDispatch( { type: "login", value: response } );
         props.history.push( "/transactions" )
       } else {
         console.log( 'Invalid Username or Password' )

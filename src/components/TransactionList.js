@@ -20,7 +20,7 @@ function TransactionList() {
                 <span className="column has-text-left">{ transaction.merchant }</span>
                 <span className="column has-text-right"><i className="fas fa-dollar-sign"></i>{ transaction.amount.toFixed( 2 ) }</span>
               </div>
-              <div className="has-text-left">{ transaction.date }</div>
+              <div className="has-text-left">{ transaction.date.toLocaleString() }</div>
             </div>
           </a>
         )
