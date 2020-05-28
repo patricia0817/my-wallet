@@ -5,15 +5,19 @@ async function getUserService() {
   try {
     const response = await Axios.get( 'https://banking-app-1e647.firebaseio.com/0.json' );
 
-    console.log( moment().subtract( Math.floor( Math.random() * 7 ), 'days' ).format( 'DD/MM/YYYY' ) )
 
     return {
       ...response.data,
-      transactions: [ ...response.data.transactions ].sort( ( current, next ) => {
+      transactions: [ ...response.data.transactions ].map( ( transaction ) => {
+        return {
+          ...transaction,
+          date: moment().subtract( Math.floor( Math.random() * 7 ), 'days' )
+        }
+      } ).sort( ( current, next ) => {
         let comparison = 0
-        if ( new Date( current.date ).getTime() < new Date( next.date ).getTime() ) {
+        if ( moment( current.date ).isBefore( next.date ) ) {
           comparison = 1
-        } else if ( new Date( current.date ).getTime() > new Date( next.date ).getTime() ) {
+        } else if ( moment( current.date ).isAfter( next.date ) ) {
           comparison = -1
         }
         return comparison
