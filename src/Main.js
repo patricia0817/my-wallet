@@ -22,7 +22,6 @@ function Main() {
       case 'login':
         draft.loggedIn = true
         draft.user = action.value
-
         return
       case 'logout':
         draft.loggedIn = false

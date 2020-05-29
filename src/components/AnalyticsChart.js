@@ -37,20 +37,13 @@ function AnalyticsChart() {
   }
 
   function random_bg_color() {
-    let x = Math.floor( Math.random() * 256 );
-    let y = Math.floor( Math.random() * 256 );
-    let z = Math.floor( Math.random() * 256 );
-    let bgColor = "rgb(" + x + "," + y + "," + z + ")";
+    let x = [ 2, 3, 4, 5, 6, 7, 8, 9 ][ Math.floor( Math.random() * 7 ) ];
+    let bgColor = `rgba(197,220,231,.${ x })`;
     return bgColor
   }
 
-  let colors = ( function generateChartColors() {
-    let colors = []
-    populateAnalyticsData( transactions ).forEach( () => {
-      colors.push( random_bg_color() )
-    } )
-    return colors
-  } )()
+  let colors = populateAnalyticsData( transactions ).map( () => random_bg_color() )
+
 
   useEffect( () => {
     if ( ctxAnalytics ) {
