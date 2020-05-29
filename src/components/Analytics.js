@@ -29,7 +29,7 @@ function Analytics( props ) {
     appState.loggedIn &&
     <>
       <div className="columns is-centered">
-        <div className="page__container  is-4-tablet is-centered transaction-list__container column is-5 has-text-centered">
+        <div className="page__container  is-12-mobile is-10-tablet is-4-desktop is-centered analytics-list__container column has-text-centered">
           <AnalyticsChart />
           <AnalyticsList />
           <div className="transactions__controls">

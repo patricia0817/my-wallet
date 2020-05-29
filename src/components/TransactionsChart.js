@@ -6,7 +6,7 @@ import moment from 'moment'
 function TransactionsChart() {
   const appState = useContext( StateContext )
 
-  let ctx = useRef( null );
+  let ctxTransactions = useRef( null );
 
   function getTimeLabels( today ) {
     let count = 0;
@@ -42,8 +42,8 @@ function TransactionsChart() {
 
 
   useEffect( () => {
-    if ( ctx ) {
-      new Chart( ctx.current, {
+    if ( ctxTransactions ) {
+      new Chart( ctxTransactions.current, {
         type: 'line',
         data: {
           labels: getTimeLabels( appState.user.transactions[ 0 ].date ),
@@ -51,10 +51,10 @@ function TransactionsChart() {
             label: 'Transactions',
             data: populateTransactionData(),
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
+              'rgba(201, 198, 198, 0.79)',
             ],
             borderColor: [
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 221, 87, 1)'
             ],
             borderWidth: 1
           } ]
@@ -73,7 +73,9 @@ function TransactionsChart() {
   }, [] )
 
 
-  return ( <canvas ref={ ctx } id="myChart" width="400" height="400"></canvas> )
+  return (
+    <canvas ref={ ctxTransactions } id="myTransactionChart" width="400" height="400"></canvas>
+  )
 }
 
 
