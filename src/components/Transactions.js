@@ -6,6 +6,7 @@ import TransactionList from './TransactionList'
 import DispatchContext from '../DispatchContext'
 import StateContext from '../StateContext'
 
+
 function Transactions( props ) {
   const appDispatch = useContext( DispatchContext )
   const appState = useContext( StateContext )

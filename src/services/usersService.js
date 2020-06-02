@@ -1,6 +1,7 @@
 import Axios from 'axios'
 import moment from 'moment'
 
+
 async function getUserService() {
   try {
     const response = await Axios.get( 'https://banking-app-1e647.firebaseio.com/0.json' );

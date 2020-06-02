@@ -1,22 +1,13 @@
 import React, { useEffect, useContext } from 'react'
 import StateContext from '../StateContext'
 
+import { reduceTransactions } from '../Utils'
+
+
 function AnalyticsListItem() {
   const appState = useContext( StateContext )
 
-  const analytics = appState.user.transactions.reduce( ( acc, tr ) => {
-    if ( acc[ tr.category ] !== undefined ) {
-      acc[ tr.category ].amount += tr.amount
-      acc[ tr.category ].count += 1
-    } else {
-      acc[ tr.category ] = {
-        amount: tr.amount,
-        count: 1
-      }
-    }
-
-    return acc
-  }, {} )
+  const analytics = reduceTransactions( appState.user.transactions, 'category' )
 
 
   return (
