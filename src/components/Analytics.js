@@ -6,6 +6,7 @@ import StateContext from '../StateContext'
 import DispatchContext from '../DispatchContext'
 import AnalyticsList from './AnalyticsList'
 
+
 function Analytics( props ) {
   const appDispatch = useContext( DispatchContext )
   const appState = useContext( StateContext )
@@ -16,6 +17,7 @@ function Analytics( props ) {
 
   function handleLogout() {
     appDispatch( { type: 'logout' } )
+    props.history.push( '/' )
   }
 
   useEffect( () => {

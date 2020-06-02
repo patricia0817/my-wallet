@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import Axios from 'axios'
 
 import StateContext from '../StateContext'
 import DispatchContext from '../DispatchContext'
@@ -21,8 +20,7 @@ function Home( props ) {
     try {
       const response = await getUserService()
 
-      if ( true ) {
-        // if ( response.data.username === username && response.data.password === password ) {
+      if ( response.username === username && response.password === password ) {
         appDispatch( { type: "login", value: response } );
         props.history.push( "/transactions" )
       } else {

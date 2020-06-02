@@ -32,8 +32,8 @@ function Main() {
     }
   }
 
-
   const [ state, dispatch ] = useImmerReducer( appReducer, initialState )
+
 
   return (
     <StateContext.Provider value={ state }>

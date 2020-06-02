@@ -6,7 +6,6 @@ async function getUserService() {
   try {
     const response = await Axios.get( 'https://banking-app-1e647.firebaseio.com/0.json' );
 
-
     return {
       ...response.data,
       transactions: [ ...response.data.transactions ].map( ( transaction ) => {
